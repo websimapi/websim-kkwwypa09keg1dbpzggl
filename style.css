@@ -1,0 +1,183 @@
+/* Variables for Vaporwave/CRT theme */
+:root {
+    --color-bg: #110011;
+    --color-primary: #00ffff; /* Cyan/Aqua */
+    --color-secondary: #ff00ff; /* Magenta/Fuchsia */
+    --color-text: #00ff00; /* Neon Green */
+    --color-shadow: rgba(0, 255, 255, 0.6);
+    --font-mono: 'Digital', monospace; /* Placeholder for digital/retro font */
+    --crt-scanline-opacity: 0.1;
+}
+
+@font-face {
+    font-family: 'Digital';
+    src: local('Courier New'), local('monospace');
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* CRT Effect Base */
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+}
+
+#root {
+    width: 95vw;
+    height: 95vh;
+    border: 3px solid var(--color-primary);
+    box-shadow: 0 0 20px var(--color-primary), 0 0 50px var(--color-secondary) inset;
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
+    
+    /* Simulate CRT rounded corners */
+    border-radius: 10px;
+}
+
+/* Scanline and CRT overlay effects */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(18, 16, 16, 0.1),
+        rgba(18, 16, 16, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    opacity: var(--crt-scanline-opacity);
+    z-index: 20;
+}
+
+/* Glitch effect for text */
+h1, h2, .data-display {
+    text-shadow: 0 0 5px var(--color-shadow), 0 0 10px var(--color-shadow);
+    color: var(--color-primary);
+    animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.98; }
+    50% { opacity: 1; }
+    100% { opacity: 0.95; }
+}
+
+.title-bar {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--color-secondary);
+    padding-bottom: 10px;
+}
+
+.section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid var(--color-secondary);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.data-cell {
+    padding: 10px;
+    border: 1px solid var(--color-text);
+    text-align: center;
+}
+
+.data-cell span:first-child {
+    color: var(--color-secondary);
+    display: block;
+    font-size: 0.8em;
+}
+
+.terminal-input, button {
+    background: var(--color-bg);
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+    padding: 10px;
+    font-family: var(--font-mono);
+    box-shadow: 0 0 5px var(--color-text);
+    cursor: pointer;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--color-bg);
+    color: var(--color-text);
+    box-shadow: none;
+}
+
+.status-message {
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid var(--color-secondary);
+    color: var(--color-secondary);
+}
+
+.hologram-effect {
+    /* Subtle 3D/holographic look */
+    perspective: 500px;
+}
+
+.hologram-card {
+    border: 1px solid var(--color-primary);
+    padding: 15px;
+    margin-bottom: 15px;
+    transform: rotateX(5deg);
+    transition: transform 0.5s;
+    box-shadow: 0 0 10px var(--color-primary) inset, 0 0 5px var(--color-secondary);
+    background: rgba(0, 50, 50, 0.1); /* Subtle internal light */
+}
+
+.hologram-card:hover {
+    transform: rotateX(0deg);
+}
+
+/* User Account Display */
+.account-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px dashed var(--color-text);
+}
+
+.account-info strong {
+    color: var(--color-primary);
+}
+
+.tip-control, .stake-control {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
